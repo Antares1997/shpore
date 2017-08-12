@@ -1,0 +1,23 @@
+{
+  "port":3000,
+  "session": {
+    "secret": "Antares",
+    "key": "sid",
+    "cookie": {
+      "path": "/",
+      "httpOnly": "true",
+      "maxAge": null
+    }
+  },
+  "mongoose": {
+    "url": "mongodb://SergiyKorotun:KorotunSergiy1997@ds115752.mlab.com:15752/users",
+    "options": {
+      "server": {
+        "soccketOptions": {
+          "keepAlive": 1
+        }
+      }
+    },
+    "useMongoClient": true
+  }
+}

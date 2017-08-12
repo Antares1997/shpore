@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="xfakehopex">
+<title>Node.js File Uploads</title>
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/main.css">
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+</script>
+<meta name="keywords" content="Tender Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndriodCompatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!--Google Fonts-->
+</head>
+<body>
+  <div class="mother-grid">
+    <div class="container">
+      <div class="temp-padd">
+  <!--top nav end here-->
+  <!--title start here-->
+  <div class="top-authoriz">
+  				<span class="top-authoriz1">
+  				<a href="../login" class="top-authoriz1">Вийти</a>
+  				</div>
+  <div class="title-main">
+   <a href="../shpore" ><img src="../images/desktop.png" align="left" width="128" height="128"/><h1>SARA's STUDY</h1></a>
+  </div>
+  <div class="header">
+  			<div class="navg">
+  				<span class="menu"> <img src="images/icon.png" alt=""/></span>
+  				<ul class="res">
+  					<li><a href="../shpore">Головна</a></li>
+            <li> <a href="../about">Предмети</a>
+
+                <ul class="submenu">
+
+                  <li><a href="../math">Математика</a></li>
+
+                  <li><a href="../english">Англійська</a></li>
+
+                   <li><a href="../biology">Біологія</a></li>
+
+
+                </ul>
+
+          </li>
+  					<li><a href="../upload" class="active">Завантаження</a></li>
+  					<li><a href="contact">Про нас</a></li>
+            <li><a href="../personal_room">Особистий кабінет</a></li>
+            <li>  <input onkeydown="size=value.length||2" onkeyup="onkeydown()" disabled type='text' id='money' value="<%=money%>" name='money'></h4><img src='./images/money.png'><li>
+  				</ul>
+  				<script>
+                    $( "span.menu").click(function() {
+                      $(  "ul.res" ).slideToggle("slow", function() {
+                       // Animation complete.
+                       });
+                       });
+  		       </script>
+  			</div>
+  			<div class="clearfix"> </div>
+    </div>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<!--HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<input type="file" style="display: none" name="uploadFiles" id="uploadFiles" multiple>
+
+<input type="file" style="display: none" name="uploadFiles" id="uploadFiles" multiple>
+<div style="margin:45px 0 15px 15px">
+  <button id="addFilesButton" class="btn btn-primary">Завантажити</button>
+</div>
+<div class="progress">
+  <div id="progress" role="progressbar" style="width: 0%" class="progress-bar">
+  </div>
+</div>
+<table id="files" class="table">
+</table>
+</div><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script><script src="./js/image.upload.js"></script>
+<!--footer start here-->
+  <div class="footer">
+    <div class="footer-main">
+      <div class="footer-bottom">
+        <p>© Практиканти 2017  </a></p>
+      </div>
+    </div>
+     </div>
+   </div>
+  </div>
+<!--footer end here-->
+<script type="text/javascript">
+function JSUploader() {
+  this.allFiles = [];
+  var baseClass = this;
+
+  this.addFiles = function(files) {
+    $.each(files, function(i, file) {
+      var temp = {file: file, progressTotal: 0, progressDone: 0, element: null, valid: false};
+
+      temp.valid = (file.type === 'image/png' ||
+      file.type === 'image/jpeg' ||
+      file.type === 'image/jpg' ||
+      file.type === 'application/pdf') && file.size / 1024 / 1024 < 20;
+      temp.element = baseClass.attachFileToView(temp);
+      console.log(temp);
+      baseClass.allFiles.unshift(temp);
+    });
+  };
+var moneystatus;
+  this.uploadFile = function(index) {
+    var file = baseClass.allFiles[index];
+
+    if (file.valid) {
+      var data = new FormData();
+      var datatoServer = document.getElementById('list').value + '_' + document.getElementById('shporename').value;
+      data.append(datatoServer, file.file);
+      $.ajax({
+        url: '/upload',
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        context: document.body,
+        success: function(response) {
+          var message = file.element.find('td.message');
+          if (response.status === 'ok') {
+            if ((response.origin === 0)) {
+              var progress = $('.progress-bar');
+              message.html(response.errors);
+              progress.width(0 + '%');
+              progress.html(0 + '%');
+              $('#progress').width(0 + '%');
+              $('#progress').html(0 + '%');
+            }
+            if (response.NumberOfDowndload <= 0) {
+              alert('Кiлькiсть загрузок на сьогоднi вичерпана!');
+              $('#addFilesButton').prop('disabled', true);
+            }
+            message.html(response.text);
+            $('#money').val(response.money);
+            moneystatus = response.money;
+            file.element.find('button.uploadButton').remove();
+            $('#addFilesButton').prop('disabled', null);
+          } else {
+          message.html(response.errors);
+          }
+
+        },
+        xhr: function() {
+          var xhr = $.ajaxSettings.xhr();
+
+          if (xhr.upload) {
+            console.log('xhr upload');
+
+            xhr.upload.onprogress = function(e) {
+              file.progressDone = e.position || e.loaded;
+              file.progressTotal = e.totalSize || e.total;
+              baseClass.updateFileProgress(index, file.progressDone, file.progressTotal, file.element);
+              baseClass.totalProgressUpdated();
+              console.log('xhr.upload progress: ' + file.progressDone + ' / ' + file.progressTotal + ' = ' + (Math.floor(file.progressDone / file.progressTotal * 1000) / 10) + '%');
+            };
+          }
+
+          return xhr;
+        }
+      });
+    }
+  };
+
+  this.uploadAllFiles = function() {
+    $.each(baseClass.allFiles, function(i, file) {
+      baseClass.uploadFile(i);
+    });
+  };
+
+  this.updateFileProgress = function(index, done, total, view) {
+    var percent = (Math.floor(done / total * 1000) / 10);
+
+    var progress = view.find('div.progress-bar');
+
+    progress.width(percent + '%');
+    progress.html(percent + '%');
+  };
+
+  this.updateTotalProgress = function(done, total) {
+    var percent = (Math.floor(done / total * 1000) / 10);
+    $('#progress').width(percent + '%');
+    $('#progress').html(percent + '%');
+  };
+
+  this.totalProgressUpdated = function() {
+    var done = 0.0;
+    var total = 0.0;
+
+    $.each(baseClass.allFiles, function(i, file) {
+      done += file.progressDone;
+      total += file.progressTotal;
+    });
+
+    baseClass.updateTotalProgress(done, total);
+  };
+
+  this.attachFileToView = function(file) {
+    var row = $('<tr>');
+    row.hide();
+
+    var isValidType = (file.file.type === 'image/png' ||
+    file.file.type === 'image/jpeg' ||
+    file.file.type === 'image/jpg' ||
+    file.file.type === 'application/pdf');
+
+    var isValidSize = file.file.size / 1024 / 1024 < 20;
+
+    // create preview
+    var preview = $('<td>');
+    preview.width('100px');
+    if (isValidType) {
+      if (file.file.type === 'image/png' ||
+      file.file.type === 'image/jpeg' ||
+      file.file.type === 'image/jpg') {
+        var img = $('<img>');
+        img.attr('class', 'img-fullsize');
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          img.attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file.file);
+
+        preview.append(img);
+      } else {
+        preview.append('PDF');
+      }
+    }
+
+    // create file info column
+    var fileInfo = $('<td contenteditable="">');
+    fileInfo.width('200px');
+
+    var fileName = $('<div>');
+    fileName.html(file.file.name);
+
+    var fileType = $('<div>');
+    fileType.html(file.file.type);
+
+    var fileSize = $('<div>');
+    // var size = file.file.size;
+
+    if ((file.file.size / 1024 / 1024) > 1.0) {
+      fileSize.html(Math.floor(file.file.size / 1024 / 1024) + ' MB');
+    } else if ((file.file.size / 1024) > 1.0) {
+      fileSize.html(Math.floor(file.file.size / 1024) + ' KB');
+    } else {
+      fileSize.html(file.file.size + ' bytes');
+    }
+
+
+    fileInfo.append(fileName);
+    fileInfo.append(fileType);
+    fileInfo.append(fileSize);
+
+    // create message column
+    var messageColumn = $('<td>');
+    messageColumn.attr('class', 'message');
+    messageColumn.width('200px');
+    if (!isValidType) {
+      messageColumn.html('Unsupported mimetype ' + file.file.type);
+    }
+    if (!isValidSize) {
+      messageColumn.html(messageColumn.html() + 'File size is ' + Math.floor(file.file.size / 1024 / 1024) + ' MB. Limit is 2 MB.');
+    }
+
+    // create progress
+    var progressColumn = $('<td>');
+    progressColumn.attr('style', 'vertical-align: middle;');
+    if (file.valid) {
+      var progress = $('<div>');
+
+      progress.attr('class', 'progress');
+
+      var progressBar = $('<div>');
+      progressBar.attr('class', 'progress-bar');
+      progressBar.attr('role', 'progressbar');
+      progressBar.html('0%');
+
+      progress.append(progressBar);
+      progressColumn.append(progress);
+    }
+
+    // create buttons
+    var button1 = $('<td>');
+    button1.attr('style', 'vertical-align: middle; width:50px');
+    function proverka(input) {
+      var value = input.value;
+      var rep = /[-\.;":'і а-яА-Я]/;
+      if (rep.test(value)) {
+        value = value.replace(rep, '');
+        input.value = value;
+      }
+    };
+
+    var uploadButton = $('<button>');
+    var select = document.createElement('select');
+    select.id = "list";
+    var text = $('<input type="text" name="shporename" placeholder="shporename" id="shporename" onkeyup="return proverka(this);">');
+     '<% for(var i=0; i < routes.length; i++) {%>';
+    select.innerHTML += '<option><%=routes[i].name%></option>'
+     '<% } %>';
+
+
+    uploadButton.attr('class', 'btn btn-primary uploadButton');
+    uploadButton.html('Upload');
+    uploadButton.click(function() {
+      if ((document.getElementById('shporename').value.length === 0)) {
+        alert('Введiть назву документу!');
+      } else if ((document.getElementById('list').value.length === 0)) {
+        alert('Виберiть роздiл для документу!');
+      } else {
+        baseClass.uploadFile(row.index());
+        file.file.name = document.getElementById('shporename').value;
+        text.prop('disabled', true);
+        list.prop('disabled', true);
+        $('#addFilesButton').prop('disabled', null);
+        console.log(document.getElementById('list').value.length);
+      }
+    });
+    if (file.valid) {
+      button1.append(uploadButton);
+    }
+
+    var button2 = $('<td>');
+    button2.width('50px');
+
+    var removeButton = $('<button>');
+    removeButton.attr('class', 'close');
+    removeButton.html('&times');
+    removeButton.click(function() {
+      baseClass.allFiles.splice(row.index(), 1);
+      row.fadeOut(300, function() {
+        $(this).remove();
+      });
+    });
+    button2.append(removeButton);
+
+    row.append(preview);
+    row.append(text);
+    row.append(select);
+    row.append(messageColumn);
+    row.append(progressColumn);
+    row.append(button1);
+    row.append(button2);
+
+    row.fadeIn();
+
+    $('#files').prepend(row);
+
+    return row;
+  };
+}
+
+var uploader = new JSUploader();
+
+$(document).ready(function() {
+  // var text = $('<input type="text" name="shporename" placeholder="shporename" id="shporename">');
+  $('#addFilesButton').click(function() {
+    $('#uploadFiles').replaceWith($('#uploadFiles').clone(true));
+    $('#uploadFiles').click();
+    $('#addFilesButton').prop('disabled', true);
+  });
+
+  // $('#uploadAllFilesButton').click(function() {
+  //   uploader.uploadAllFiles();
+  // });
+
+  $('#uploadFiles').change(function() {
+    var files = this.files;
+    uploader.addFiles(files);
+  });
+
+});
+
+</script>
+</body></html>

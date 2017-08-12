@@ -1,0 +1,26 @@
+.img-fullsize {
+    position: relative;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.progress {
+  width: 90%;
+  margin-left: 15px
+}
+#shporename:hover {
+  background: 2px solid green;
+}
+#shporename {
+  width: 200px;
+}
+table {
+  margin-left: -40px;
+}
+
+td.message {
+  width: 20px;
+}
+#list {
+  width: 200px;
+}

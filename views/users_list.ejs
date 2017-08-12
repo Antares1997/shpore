@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Список користувачiв</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <h1> Список користувачiв</h1>
+    <p id="lead">  </p>
+    <ul>
+    </ul>
+    <ul>
+  <% for(var i=0; i < users.length; i++) {%>
+     <li><%= users[i].username %></li>
+  <% } %>
+  </ul>
+  </body>
+</html>
