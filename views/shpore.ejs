@@ -1,5 +1,5 @@
 
-<title>Tender A Corporate category Flat bootstrap Responsive  Website Template | About :: w3layouts</title>
+<title>SARA's</title>
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery.min.js"></script>
@@ -50,19 +50,18 @@
 				<ul class="res">
 					<li><a href="../shpore" class="active">Головна</a></li>
           <li> <a href="../about">Предмети</a>
+            <ul class='submenu' id="submenu">
+            </ul>
+            <script>
+            var submenu = document.getElementById('submenu');
+            $(document).ready(function(){
+              '<% for(var i=0; i < routes.length; i++) {%>';
+             submenu.innerHTML += '<li><a href="../<%=routes[i].url%>"><%=routes[i].name%></a></li>';
+              '<% } %>';
+            });
+               </script>
 
-           <ul class="submenu">
-
-             <li><a href="../math">Математика</a></li>
-
-             <li><a href="../english">Англійська</a></li>
-
-              <li><a href="../biology">Біологія</a></li>
-
-
-           </ul>
-
-     </li>
+      </li>
 					<li><a href="../upload">Завантаження</a></li>
 					<li><a href="../contact">Про нас</a></li>
           <li><a href="../personal_room">Oсобистий кабiнет</a></li>
@@ -79,19 +78,11 @@
   </div>
 <!--header end here-->
 <div class="team">
+
 <div class="brd">
-<span class="font-weight"><center><h3>Топ скачувань</h3></center></span>
-
+  <span class="font-weight"><center><h3><img src='../images/shpori.jpg' width='100%' height='50%'></h3></center></span>
 </div>
-<div class="brd">
-<span class="font-weight"><center><h3>Новинки</h3></center></span>
-
-</div>
-<div class="brd">
-<span class="font-weight"><center><h3>Лідери завантажень</h3></center></span>
-
-</div>
-
+  <p class="textfrontbrd">Сайт створений для обміну шпаргалками!</p>
 
 
 

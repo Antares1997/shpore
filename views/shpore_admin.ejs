@@ -1,5 +1,5 @@
 
-<title>Tender A Corporate category Flat bootstrap Responsive  Website Template | About :: w3layouts</title>
+<title>SARA's</title>
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery.min.js"></script>
@@ -48,8 +48,21 @@
 			<div class="navg">
 				<span class="menu"> <img src="images/icon.png" alt=""/></span>
 				<ul class="res">
-					<li><a href="../shpore_admin" class="active">Головна</a></li>
-					<li><a href="../about">Предмети</a></li>
+					<li><a href="../shpore" class="active">Головна</a></li>
+					<li><a href="../about">Предмети</a>
+
+                      <ul class='submenu' id="submenu">
+                      </ul>
+                      <script>
+                      var submenu = document.getElementById('submenu');
+                      $(document).ready(function(){
+                        '<% for(var i=0; i < routes.length; i++) {%>';
+                       submenu.innerHTML += '<li><a href="../<%=routes[i].url%>"><%=routes[i].name%></a></li>';
+                        '<% } %>';
+                      });
+                         </script>
+
+                </li>
 					<li><a href="../upload">Завантаження</a></li>
           <li><a href="../personal_room">Личный кабинет</a></li>
           <li><a href="../admin">Адмiн</a></li>
@@ -65,25 +78,8 @@
 			<div class="clearfix"> </div>
   </div>
 <!--header end here-->
-<div class="team">
-<div class="brd">
-<span class="font-weight"><center><h3>Топ скачувань</h3></center></span>
-
-</div>
-<div class="brd">
-<span class="font-weight"><center><h3>Новинки</h3></center></span>
-
-</div>
-<div class="brd">
-<span class="font-weight"><center><h3>Лідери завантажень</h3></center></span>
-
-</div>
-
-
-
-
-
-
+<div class="team" >
+<!-- <img src="../images/shpori.jpg" alt=""> -->
 	<div class="clearfix"> </div>
 </div>
 </div>

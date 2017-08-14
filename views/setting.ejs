@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Tender A Corporate category Flat bootstrap Responsive  Website Template | About :: w3layouts</title>
+<title>SARA's</title>
 <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="./js/jquery.min.js"></script>
@@ -34,6 +34,31 @@ value = value.replace(rep, '');
 input.value = value;
 }
 }
+
+function check() {
+  if($('#oldpassword').val() === '') {
+    $('#newpassword').prop('disabled', true);
+    $('#newpassword2').prop('disabled', true);
+} else {
+  $('#newpassword').prop('disabled', null);
+  $('#newpassword2').prop('disabled', null);
+  if ( ($('#newpassword').val() === '')  || ($('#newpassword2').val() === '')) {
+    $('#zmina').prop('disabled', true);
+    $('#newpassword2').css('border', '');
+  } else {
+  if (($('#newpassword').val() !== $('#newpassword2').val())) {
+    $('#newpassword2').css('border', '3px solid red');
+    // $('#newpassword2').val("Пароль не співпадає!");
+    $('#newpassword2').css('color', 'red');
+    $('#zmina').prop('disabled', true);
+  }else {
+    $('#newpassword2').css('color', '');
+    $('#newpassword2').css('border', '');
+    $('#zmina').prop('disabled', null);
+  }
+}
+}
+}
 	</script>
 <!-- //end-smoth-scrolling -->
 </head>
@@ -61,18 +86,18 @@ input.value = value;
 
           					<li><a href="../shpore">Головна</a></li>
           					 <li> <a href="../about">Предмети</a>
+                       <ul class='submenu' id="submenu">
+                       </ul>
+                       <script>
+                       var submenu = document.getElementById('submenu');
+                       $(document).ready(function(){
+                         '<% for(var i=0; i < routes.length; i++) {%>';
+                        submenu.innerHTML += '<li><a href="<%=routes[i].url%>"><%=routes[i].name%></a></li>';
+                         '<% } %>';
+                       });
+                          </script>
 
-            <ul class="submenu">
-
-              <li><a href="../math">Математика</a></li>
-
-              <li><a href="../english">Англійська</a></li>
-
-               <li><a href="../biology">Біологія</a></li>
-
-            </ul>
-
-      </li>
+                 </li>
           					<li><a href="../upload">Завантаження</a></li>
           					<li><a href="contact">Про нас</a></li>
                     <li><a href="../personal_room" class="active" >Особистий кабінет</a></li>
@@ -91,12 +116,12 @@ input.value = value;
 <div class="team">
   <form class="nastrojku" action="" method="post">
   <h1>Зміна пароля</h1><br>
-   <input class="poleparol" type="text" placeholder="Старий пароль"/ name="oldpassword" value="" onkeyup="return proverka(this);"><br>
+   <input class="poleparol" type="text" placeholder="Старий пароль"/ name="oldpassword" id="oldpassword" value="" onkeyup=" proverka(this), check()"><br>
 
-  <input class="poleparol" type="text" placeholder="Новий пароль"/ name="newpassword" value="" onkeyup="return proverka(this);"><br>
+  <input class="poleparol" type="password" disabled placeholder="Новий пароль"/ name="newpassword" id ='newpassword' value="" onkeyup=" proverka(this), check()"><br>
 
-  <input class="poleparol" type="text" placeholder="Підтвердити новий пароль"/ name="newpassword2" value="" onkeyup="return proverka(this);"><br>
-  <input class="zmina" type='submit' value="Змінити пароль">
+  <input class="poleparol" type="password" disabled  placeholder="Підтвердити новий пароль"/ name="newpassword2" id='newpassword2' value="" onkeyup="  proverka(this), check()"><br>
+  <input class="zmina" type='submit' value="Змінити пароль" id="zmina" disabled>
   </form>
 	<div class="clearfix"> </div>
 </div>
@@ -106,12 +131,26 @@ input.value = value;
   <div class="footer">
 		<div class="footer-main">
 			<div class="footer-bottom">
-				<p>© Практиканти 2017  </a></p>
+				<script type="text/javascript">
+        var response = '';
+        response = '<%=status%>';
+        if(response === 'ok') {
+          alert('Пароль успiшно змiнений!');
+        } else if(response === 'bad') {
+          alert('Старий пароль не вiрний!');
+        } else if(response === 'notEqual') {
+            alert('Старий пароль не вiрний!');
+        }
+
+				</script>
 			</div>
 		</div>
 	   </div>
    </div>
   </div>
 <!--footer end here-->
+<script type="text/javascript" src="./js/setting.js">
+
+</script>
 </body>
 </html>

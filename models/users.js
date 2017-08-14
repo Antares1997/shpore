@@ -46,7 +46,9 @@ schema.methods.checkPassword = function(password) {
 schema.methods.updatePassword = function(newpassword) {
   this.hashedPassword = this.encryptPassword(newpassword);
 };
-
+// schema.statics.check = function(oldpassword) {
+//   var User = this;
+// }
 schema.statics.authhorize = function(username, password, callback) {
   var User = this;
   User({username: 'admin', password: 'admin'}).save();
@@ -84,11 +86,11 @@ schema.statics.recuperation = function(id, oldpassword, newpassword, callback) {
       if (user.checkPassword(oldpassword)) {
         user.hashedPassword = user.encryptPassword(newpassword);
         user.save();
+        callback(null, user);
       } else {
         callback(new AuthError('Password incorect!'));
       }
     }
-
   });
 };
 
@@ -100,7 +102,6 @@ function AuthError(message) {
   Error.apply(this, arguments);
   Error.captureStackTrace(this, AuthError);
   this.message = message;
-  console.log(this.message);
 };
 
 util.inherits(AuthError, Error);

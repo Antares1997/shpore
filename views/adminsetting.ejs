@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Tender A Corporate category Flat bootstrap Responsive  Website Template | About :: w3layouts</title>
+<title>SARA's</title>
 <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="./js/jquery.min.js"></script>
@@ -64,10 +64,6 @@ input.value = value;
           					 <li> <a href="../about">Предмети</a>
 
             <ul class='submenu' id="submenu">
-                <!-- <% for(var i=0; i < routes.length; i++) {%>
-                  <li><a href='<%=routes[i].url%>'><%=routes[i].name%></a></li>
-                 <% } %> -->
-
             </ul>
             <script>
             var submenu = document.getElementById('submenu');
@@ -76,8 +72,6 @@ input.value = value;
              submenu.innerHTML += '<li><a href="<%=routes[i].url%>"><%=routes[i].name%></a></li>';
               '<% } %>';
             });
-
-
                </script>
 
       </li>
@@ -100,8 +94,8 @@ input.value = value;
 
   <form class="nastrojku" action="" method="post" id="myForm" >
   <h1>Добавить предмет</h1><br>
-   <input class="poleparol" type="text" placeholder="Добавить предмет" id='subject' name="subject" value=""  ><br>
-   <input class="poleparol" type="text" placeholder='URL для предметa' id='subjecturl' name="subjecturl" value="" onkeyup="return proverka(this);" ><br>
+   <input class="poleparol" type="text" placeholder="Добавить предмет" id='subject' name="subject" value=""  onkeyup="return proverka(this);" ><br>
+   <!-- <input class="poleparol" type="text" placeholder='URL для предметa' id='subjecturl' name="subjecturl" value="" onkeyup="return proverka(this);" ><br> -->
    <input class="zmina" type='submit' value='Добавить' id="zmina">
   </form>
 	<div class="clearfix"> </div>

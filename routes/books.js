@@ -1,4 +1,6 @@
 
+var fs = require('fs');
+var multiparty = require('multiparty');
 var mongoose = require('../libs/mongoose.js');
 var ObjectID = require('mongodb').ObjectID;
 exports.get = function(req, res) {
@@ -10,7 +12,11 @@ exports.get = function(req, res) {
           if (err) {
             throw err;
           } else {
-            res.render('books', {books: books});
+            mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
+              if (err) throw err;
+              res.render('books', {books: books, routes: routes});
+              // res.send(books);
+            });
           }
         });
       } else {
@@ -20,4 +26,15 @@ exports.get = function(req, res) {
   } else {
     return res.render('error');
   }
+};
+
+exports.post = function(req, res) {
+  var url = JSON.stringify(req.body).split(':')[0].split('"')[1];
+  mongoose.connection.db.collection('books').remove({url: url});
+  var test = './public' + url.slice(1);
+  fs.unlink(test, function(err) {
+    if (err) console.log(err);
+    return res.send({status: 'ok', url: url});
+  });
+
 };

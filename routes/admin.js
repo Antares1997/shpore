@@ -8,7 +8,10 @@ exports.get = function(req, res) {
         mongoose.connection.db.collection('users').findOne({_id: ObjectID(req.session.user)}, function(err, doc) {
           if (err) throw err;
           if (doc.username === 'admin') {
-            res.render('admin');
+            mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
+              if (err) throw err;
+              return res.render('admin', {routes: routes});
+            });
           } else {
             return res.render('error');
           }

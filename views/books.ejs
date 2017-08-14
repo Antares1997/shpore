@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Tender A Corporate category Flat bootstrap Responsive  Website Template | About :: w3layouts</title>
+<title>SARA's</title>
 <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="./js/jquery.min.js"></script>
@@ -49,6 +49,7 @@
 </script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 </script>
+<script type="text/javascript" src='./js/books.js'/>
 <meta name="keywords" content="Tender Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndriodCompatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <!--Google Fonts-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -90,18 +91,18 @@
 				<ul class="res">
 					<li><a href="../shpore">Головна</a></li>
           <li> <a class="active" href="../about">Предмети</a>
+            <ul class='submenu' id="submenu">
+            </ul>
+            <script>
+            var submenu = document.getElementById('submenu');
+            $(document).ready(function(){
+              '<% for(var i=0; i < routes.length; i++) {%>';
+             submenu.innerHTML += '<li><a href="../<%=routes[i].url%>"><%=routes[i].name%></a></li>';
+              '<% } %>';
+            });
+               </script>
 
-              <ul class="submenu">
-
-                <li><a href="../math">Математика</a></li>
-
-                <li><a href="../english">Англійська</a></li>
-
-                 <li><a href="../biology">Біологія</a></li>
-
-              </ul>
-
-        </li>
+      </li>
 					<li><a href="../upload">Завантаження</a></li>
 					<li><a href="contact">Про нас</a></li>
           <li><a href="../personal_room">Личный кабинет</a></li>
@@ -139,7 +140,7 @@
   </div>
 <!--header end here-->
 <div class="team">
-
+  <form class="" action="" method="post" name=''>
     <% for(var i=0; i < books.length; i++) {%>
     <div class="" id="id">  <table id="table">
   <tr><td>  <a href='<%= books[i].url %>'><img src="<%= books[i].url %>" width="200px" height="150px" class="" id='img'></a></td></tr>
@@ -149,19 +150,13 @@
     <tr><td>Размер</td> <td><%= books[i].size %></td></tr>
     <tr><td>Загрузчик</td> <td><%= books[i].uploader %></td></tr>
   <tr><td>Дата загрузки</td> <td><%= books[i].data %></td></tr>
-<button type="button" name="button" id='delete' ></button>
+<button type="submit" name="button" id='delete' value="<%= books[i].url %>" onclick="test()"></button>
+<!-- <input type="submit" name='button' id="delete" value="<%= books[i].url %>" onclick="test()" -->
       </table>
       </div>
-
-
     <% } %>
-
+  </form>
     <script type="text/javascript">
-    $(document).ready(function() {
-      $('button').click(function() {
-        $(this).parent().remove();
-      });
-    });
 
     </script>
 <style media="screen">
@@ -198,6 +193,7 @@
    </div>
   </div>
             </form>
+
 <!--footer end here-->
 </body>
 </html>

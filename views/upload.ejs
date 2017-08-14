@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="utf-8">
+  <title>SARA's</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="xfakehopex">
-<title>Node.js File Uploads</title>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/main.css">
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
@@ -42,18 +42,18 @@
   					<li><a href="../shpore">Головна</a></li>
             <li> <a href="../about">Предмети</a>
 
-                <ul class="submenu">
+                                    <ul class='submenu' id="submenu">
+                                    </ul>
+                                    <script>
+                                    var submenu = document.getElementById('submenu');
+                                    $(document).ready(function(){
+                                      '<% for(var i=0; i < routes.length; i++) {%>';
+                                     submenu.innerHTML += '<li><a href="<%=routes[i].url%>"><%=routes[i].name%></a></li>';
+                                      '<% } %>';
+                                    });
+                                       </script>
 
-                  <li><a href="../math">Математика</a></li>
-
-                  <li><a href="../english">Англійська</a></li>
-
-                   <li><a href="../biology">Біологія</a></li>
-
-
-                </ul>
-
-          </li>
+                              </li>
   					<li><a href="../upload" class="active">Завантаження</a></li>
   					<li><a href="contact">Про нас</a></li>
             <li><a href="../personal_room">Особистий кабінет</a></li>
@@ -125,7 +125,7 @@ var moneystatus;
 
     if (file.valid) {
       var data = new FormData();
-      var datatoServer = document.getElementById('list').value + '_' + document.getElementById('shporename').value;
+      var datatoServer = document.getElementById('list').value.toLowerCase() + '_' + document.getElementById('shporename').value;
       data.append(datatoServer, file.file);
       $.ajax({
         url: '/upload',
@@ -323,7 +323,7 @@ var moneystatus;
 
 
     uploadButton.attr('class', 'btn btn-primary uploadButton');
-    uploadButton.html('Upload');
+    uploadButton.html('Завантажити (10 монет)');
     uploadButton.click(function() {
       if ((document.getElementById('shporename').value.length === 0)) {
         alert('Введiть назву документу!');

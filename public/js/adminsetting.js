@@ -1,12 +1,13 @@
 
+
 var zmina = document.getElementById('zmina');
 zmina.onclick = function(event) {
   event.preventDefault();
   event.stopPropagation();
   var dataForm = new FormData();
   var subjectname = document.getElementById('subject').value;
-  var subjecturl = document.getElementById('subjecturl').value;
-  var data = subjectname + '_' + subjecturl;
+  // var subjecturl = document.getElementById('subjecturl').value;
+  var data = subjectname;
   dataForm.append('subject', data);
   $.ajax({
     type: 'POST',
@@ -16,7 +17,7 @@ zmina.onclick = function(event) {
     success: function(response) {
       if (response.status !== 'bad') {
         var newLi = document.createElement('li');
-        newLi.innerHTML = '<a href=' + response.subject + '>' + response.subject + '</a>';
+        newLi.innerHTML = '<a href=' + response.routes.url + '>' + response.routes.name + '</a>';
         var submenu = document.getElementById('submenu');
         submenu.appendChild(newLi);
         alert('Add new subject!');
@@ -27,6 +28,6 @@ zmina.onclick = function(event) {
     }
   });
   $('#subject').val('');
-  $('#subjecturl').val('');
+  // $('#subjecturl').val('');
 
 };

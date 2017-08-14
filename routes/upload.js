@@ -13,7 +13,11 @@ exports.get = function(req, res) {
         var money = doc.money;
         mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
           if (err) throw err;
-          return res.render('upload', {money: money, routes: routes});
+          mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
+            if (err) throw err;
+            return res.render('upload', {money: money, routes: routes});
+          });
+
         });
 
       }
@@ -88,14 +92,14 @@ exports.post = function(req, res) {
         throw err;
       } else {
         if (doc) {
-          errors.push('Не удалось, файл с таким именем уже существует!');
-          res.send({status: 'bad', errors: 'Не удалось, файл с таким именем уже существует!', origin: 0});
+          errors.push('Не вдалося завантажити, файл с таким iменем вже iснує!');
+          res.send({status: 'bad', errors: 'Не вдалося завантажити, файл с таким iменем вже iснує!', origin: 0});
         } else {
           url = uploadFile.path;
           var temp = url.split('/');
           temp.splice(0, 2);
           url = './' + temp.join('/');
-          console.log(uploadFile.size);
+          // console.log(uploadFile.size);
           mongoose.connection.db.collection('users').findOne({_id: ObjectID(req.session.user)}, function(err, doc) {
             if (err) throw err;
             mongoose.connection.db.collection('books').find().toArray(function(err, docs) {
@@ -145,7 +149,7 @@ exports.post = function(req, res) {
                       }
                     );
                   }
-                  res.send({status: 'ok', text: 'Успешно', origin: 1, money: dbmoney, NumberOfDowndload: NumberOfDowndload});
+                  res.send({status: 'ok', text: 'Успішно', origin: 1, money: dbmoney, NumberOfDowndload: NumberOfDowndload});
 
                 }
                 if (errors.length === 0) {

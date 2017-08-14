@@ -2,6 +2,7 @@ var ObjectID = require('mongodb').ObjectID;
 var mongoose = require('../libs/mongoose.js');
 var config = require('../config/index.js');
 var session = require('express-session');
+// var app = require('../app');
 var MongoStore = require('connect-mongo')(session);
 module.exports = function(app) {
   var bodyParser = require('body-parser');
@@ -53,7 +54,7 @@ module.exports = function(app) {
           }
           if (!user) {
             res.sendStatus(404);
-            console.log(req.params.id);
+            // console.log(req.params.id);
           } else {
             res.send(user);
           }
@@ -184,16 +185,9 @@ module.exports = function(app) {
   app.get('/shpore_admin/:id', require('./shpore_admin').get);
   app.get('/suspicious', require('./suspicious').get);
   app.get('/books', require('./books').get);
-
-  app.get('/math', require('./math').get);
-  app.post('/math', require('./about').post);
-
-  app.get('/english', require('./english').get);
-  app.post('/english', require('./about').post);
-
-  app.get('/biology', require('./biology').get);
-  app.post('/biology', require('./about').post);
+  app.post('/books', require('./books').post);
 
   app.get('/adminsetting', require('./adminsetting').get);
   app.post('/adminsetting', require('./adminsetting').post);
+
 };

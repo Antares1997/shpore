@@ -4,6 +4,9 @@ var ObjectID = require('mongodb').ObjectID;
 
 exports.get = function(req, res) {
   if (req.session.user !== undefined) {
+    var url = require('url').parse(req.url);
+    url = url.pathname.split('/')[1];
+    url = url.charAt(0).toUpperCase() + url.substr(1);
     mongoose.connection.db.collection('books').find().toArray(function(err, docs) {
       if (err) {
         throw err;
@@ -14,7 +17,26 @@ exports.get = function(req, res) {
           } else {
             var books = docs;
             var money = doc.money;
-            return res.render('about', {books: books, money: money});
+            var bookmas = [];
+            var section;
+            if (url === 'About') {
+              mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
+                if (err) throw err;
+                return res.render('about', {books: docs, money: money, routes: routes});
+              });
+            } else {
+              bookmas = [];
+              books.map(function(x) {
+                section = x.name.split('_')[0];
+                if (section === url) {
+                  bookmas.push(x);
+                }
+              });
+              mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
+                if (err) throw err;
+                return res.render('about', {books: bookmas, money: money, routes: routes});
+              });
+            }
           }
         });
 
@@ -38,7 +60,7 @@ exports.post = function(req, res, next) {
         // doc.
         mongoose.connection.db.collection('users').findOne({_id: ObjectID(req.session.user)}, function(err, user) {
           if (err) {
-            throw err
+            throw err;
           } else {
             if (user.username === 'admin') {
               mongoose.connection.db.collection('money').updateOne(

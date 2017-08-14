@@ -35,7 +35,11 @@ exports.get = function(req, res) {
               } else {
                 var books = docs;
                 var money = doc.money;
-                return res.render('shpore', {books: books, money: money, user: req.user});
+                mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
+                  if (err) throw err;
+                  return res.render('shpore', {books: books, money: money, user: req.user, routes: routes});
+                });
+
               }
             });
           }

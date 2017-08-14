@@ -20,7 +20,8 @@ var app = express();
 //     return console.log(err);s
 //   }
 // });
-
+// app.get('/math', require('./routes/math').get);
+// app.post('/math', require('./routes/about').post);
 require('./routes')(app);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
