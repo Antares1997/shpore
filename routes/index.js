@@ -157,7 +157,7 @@ module.exports = function(app) {
   //     }
   //   });
   // });
-  app.get('/', require('./frontpage').get);
+  app.get('/', require('./shpore').get);
   app.get('/shpore/:id', require('./shpore').get);
   app.get('/shpore', require('./shporetwo').get);
   app.post('/shpore', require('./about').post);
@@ -190,4 +190,7 @@ module.exports = function(app) {
   app.get('/adminsetting', require('./adminsetting').get);
   app.post('/adminsetting', require('./adminsetting').post);
 
+  app.get('/math', require('./about').get);
+  app.post('/math', require('./about').post);
 };
+
