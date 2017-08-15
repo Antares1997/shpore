@@ -240,11 +240,10 @@ var moneystatus;
           img.attr('src', e.target.result);
         };
         reader.readAsDataURL(file.file);
-
         preview.append(img);
       } else {
-        var img = '<img src="./images/PDF.jpg" class="img-fullsize">';
-        preview.append('PDF');
+        var img = '<img class="img-fullsize" src="./images/PDF.jpg">';
+        preview.append(img);
       }
     }
 
@@ -282,7 +281,7 @@ var moneystatus;
       messageColumn.html('Unsupported mimetype ' + file.file.type);
     }
     if (!isValidSize) {
-      messageColumn.html(messageColumn.html() + 'File size is ' + Math.floor(file.file.size / 1024 / 1024) + ' MB. Limit is 2 MB.');
+      messageColumn.html(messageColumn.html() + 'File size is ' + Math.floor(file.file.size / 1024 / 1024) + ' MB. Limit is 20 MB.');
     }
 
     // create progress

@@ -6,7 +6,6 @@ exports.get = function(req, res) {
   if (req.session.user !== undefined) {
     var url = require('url').parse(req.url);
     url = url.pathname.split('/')[1];
-    url = url.charAt(0).toUpperCase() + url.substr(1);
     mongoose.connection.db.collection('books').find().toArray(function(err, docs) {
       if (err) {
         throw err;
@@ -19,7 +18,7 @@ exports.get = function(req, res) {
             var money = doc.money;
             var bookmas = [];
             var section;
-            if (url === 'About') {
+            if (url === 'about') {
               mongoose.connection.db.collection('routes').find().toArray(function(err, routes) {
                 if (err) throw err;
                 return res.render('about', {books: docs, money: money, routes: routes});
@@ -93,6 +92,4 @@ exports.post = function(req, res, next) {
       }
     }
   });
-
-
 };

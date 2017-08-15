@@ -164,11 +164,16 @@
   };
   </script>
    <li>
+     <%if (books[i].name.split('.')[1] === 'pdf') { %>
+         <img src="./images/PDF.jpg" width="200px" height="150px" class="locked" id='img'>
+         <h3><%= books[i].name.split('_')[1] %></h3>
+        <button type="submit" name="button" onclick="pay(value)" value="<%=books[i].url %>" >Cкачати (30 монет)</button>
+     <% } else {%>
     <img src="<%= books[i].url %>" width="200px" height="150px" class="locked" id='img'>
     <h3><%= books[i].name.split('_')[1] %></h3>
    <button type="submit" name="button" onclick="pay(value)" value="<%=books[i].url %>" >Cкачати (30 монет)</button>
    <!-- <a href='#' name="sbm" onClick='submit();'>Войти</a> -->
-
+   <% } %>
  </li>
 
 <% } %>

@@ -157,7 +157,7 @@ module.exports = function(app) {
   //     }
   //   });
   // });
-  app.get('/', require('./shpore').get);
+  app.get('/', require('./frontpage').get);
   app.get('/shpore/:id', require('./shpore').get);
   app.get('/shpore', require('./shporetwo').get);
   app.post('/shpore', require('./about').post);
